@@ -2,24 +2,30 @@ name: Deploy Appery.io App
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    - name: Install Dependencies (Opcional)
-      run: npm install  # Solo si usas Node.js o tienes un package.json
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Ajusta según la versión que necesita tu proyecto
 
-    - name: Build Project (Opcional)
-      run: npm run build  # Solo si necesitas compilar tu proyecto
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps # Incluido para evitar conflictos de dependencias
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: .  # Carpeta donde está tu index.html
+      - name: Build Project
+        run: npm run build # Asegúrate de que tengas este script en tu package.json
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist # Cambia a la carpeta donde está tu proyecto compilado
