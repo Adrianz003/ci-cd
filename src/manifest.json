@@ -1,0 +1,20 @@
+{
+    "short_name": "Ejemplo_CI-CD",
+    "name": "Ejemplo_CI-CD",
+    "description": "",
+    "display": "fullscreen",
+    "orientation": "any",
+    "start_url": "/",
+    "scope": "/",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "icons": [
+
+            {
+                "src": "assets/images/appery512.png",
+                "type": "image/png",
+                "sizes": "512x512"
+            }     
+            
+    ]
+}
